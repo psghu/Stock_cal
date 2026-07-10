@@ -11,19 +11,23 @@
     <style>
       :root {
         color-scheme: light;
-        --paper: #f6f1e7;
-        --paper-strong: #fffaf0;
-        --ink: #19211f;
-        --muted: #64706b;
-        --line: rgba(25, 33, 31, 0.16);
-        --line-strong: rgba(25, 33, 31, 0.26);
-        --field: rgba(255, 250, 240, 0.92);
-        --green: #0f7a5a;
-        --green-dark: #0b5f47;
-        --red: #b34035;
-        --amber: #cf7d19;
-        --blue: #315f8f;
-        --shadow: 0 24px 70px rgba(31, 41, 35, 0.16);
+        --bg: #050505;
+        --surface: #f4f4f1;
+        --surface-strong: #ffffff;
+        --surface-soft: #eeeeea;
+        --ink: #121212;
+        --ink-soft: #444444;
+        --muted: #777a78;
+        --line: #deded9;
+        --line-strong: #c9c9c2;
+        --accent: #1d1d1b;
+        --gold: #b89b57;
+        --green: #12805f;
+        --red: #bc463b;
+        --amber: #a66b1d;
+        --shadow: 0 26px 80px rgba(0, 0, 0, 0.34);
+        --card-shadow: 0 14px 34px rgba(18, 18, 18, 0.08);
+        --radius: 8px;
       }
 
       * {
@@ -32,29 +36,32 @@
 
       html {
         min-height: 100%;
+        background: var(--bg);
       }
 
       body {
         min-height: 100vh;
         margin: 0;
+        color: var(--ink);
+        overflow-x: hidden;
         background:
-          linear-gradient(115deg, rgba(15, 122, 90, 0.11), transparent 34%),
-          linear-gradient(245deg, rgba(207, 125, 25, 0.14), transparent 31%),
+          radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.18), transparent 24rem),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.08), transparent 18rem),
           repeating-linear-gradient(
             90deg,
-            rgba(25, 33, 31, 0.035) 0,
-            rgba(25, 33, 31, 0.035) 1px,
+            rgba(255, 255, 255, 0.06) 0,
+            rgba(255, 255, 255, 0.06) 1px,
             transparent 1px,
-            transparent 72px
+            transparent 5.5rem
           ),
-          var(--paper);
-        color: var(--ink);
+          var(--bg);
         font-family:
           "Avenir Next",
           "PingFang SC",
           "Hiragino Sans GB",
           "Microsoft YaHei",
           sans-serif;
+        letter-spacing: 0;
       }
 
       button,
@@ -66,83 +73,155 @@
         border: 0;
       }
 
-      .page {
-        width: min(1120px, calc(100% - 32px));
+      .workspace {
+        width: min(76rem, calc(100% - 2rem));
         margin: 0 auto;
-        padding: 42px 0;
+        padding: 3rem 0;
       }
 
-      .shell {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) minmax(340px, 430px);
-        gap: 22px;
-        align-items: stretch;
-      }
-
-      .masthead,
-      .panel {
-        border: 1px solid var(--line);
-        background: rgba(255, 250, 240, 0.76);
-        box-shadow: var(--shadow);
-        backdrop-filter: blur(16px);
-      }
-
-      .masthead {
-        min-height: 660px;
-        padding: 34px;
-        display: grid;
-        grid-template-rows: auto 1fr auto;
+      .dashboard {
         position: relative;
         overflow: hidden;
+        width: 100%;
+        max-width: 100%;
+        border: 0.45rem solid #0d0d0d;
+        border-radius: var(--radius);
+        background: var(--surface);
+        box-shadow: var(--shadow);
       }
 
-      .masthead::before {
-        content: "";
+      .dashboard::before {
+        content: "STOCK POSITION";
         position: absolute;
-        inset: 24px;
-        border: 1px solid rgba(25, 33, 31, 0.1);
+        top: -2.4rem;
+        left: 1.5rem;
+        color: rgba(0, 0, 0, 0.035);
+        font-size: 5.4rem;
+        line-height: 1;
+        font-weight: 800;
+        white-space: nowrap;
         pointer-events: none;
       }
 
-      .brandline {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 16px;
+      .topbar {
         position: relative;
         z-index: 1;
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 1rem;
+        align-items: center;
+        padding: 1rem 1.1rem 0.8rem;
+        border-bottom: 1px solid var(--line);
       }
 
-      .mark {
-        display: inline-grid;
+      .brand {
+        display: flex;
+        gap: 0.55rem;
+        align-items: center;
+        min-width: 0;
+        font-size: 1rem;
+        font-weight: 800;
+        min-width: 0;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 2rem;
+        height: 2rem;
         place-items: center;
-        width: 48px;
-        height: 48px;
-        background: var(--ink);
-        color: var(--paper-strong);
+        border-radius: 50%;
+        background: var(--accent);
+        color: #fff;
         font-family: Georgia, "Times New Roman", serif;
-        font-size: 24px;
-        line-height: 1;
+        font-size: 1rem;
+      }
+
+      .nav-pills {
+        display: flex;
+        justify-content: center;
+        gap: 0.35rem;
+        min-width: 0;
+      }
+
+      .nav-pill {
+        display: inline-flex;
+        min-height: 1.9rem;
+        align-items: center;
+        border-radius: 999px;
+        padding: 0 0.8rem;
+        color: var(--muted);
+        font-size: 0.78rem;
+        white-space: nowrap;
+      }
+
+      .nav-pill.active {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .top-actions {
+        display: flex;
+        gap: 0.55rem;
+        align-items: center;
+        justify-content: flex-end;
+        min-width: 0;
       }
 
       .storage-note {
-        color: var(--muted);
-        font-size: 14px;
+        min-height: 1.9rem;
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0 0.75rem;
+        background: rgba(255, 255, 255, 0.55);
+        color: var(--ink-soft);
+        font-size: 0.78rem;
+        white-space: nowrap;
       }
 
-      .hero {
-        align-self: center;
+      .clear-button {
+        min-height: 1.9rem;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #fff;
+        padding: 0 0.85rem;
+        cursor: pointer;
+        font-size: 0.78rem;
+        transition:
+          transform 160ms ease,
+          background-color 160ms ease;
+      }
+
+      .clear-button:hover {
+        transform: translateY(-1px);
+        background: #000;
+      }
+
+      .intro {
         position: relative;
         z-index: 1;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 1rem;
+        align-items: end;
+        padding: 1.35rem 1.3rem 1rem;
+      }
+
+      .eyebrow {
+        margin: 0 0 0.45rem;
+        color: var(--muted);
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
       }
 
       h1 {
-        max-width: 760px;
+        max-width: 42rem;
         margin: 0;
-        font-family: Georgia, "Times New Roman", "Songti SC", serif;
-        font-size: clamp(42px, 7vw, 86px);
-        line-height: 0.94;
-        font-weight: 700;
+        font-size: 2rem;
+        line-height: 1.12;
+        font-weight: 850;
         letter-spacing: 0;
         overflow-wrap: anywhere;
       }
@@ -151,119 +230,287 @@
         display: block;
       }
 
-      .subtitle {
-        max-width: 620px;
-        margin: 22px 0 0;
+      .intro-copy {
+        max-width: 35rem;
+        margin: 0.55rem 0 0;
         color: var(--muted);
-        font-size: 18px;
-        line-height: 1.8;
+        font-size: 0.9rem;
+        line-height: 1.7;
         overflow-wrap: anywhere;
       }
 
-      .ticker {
-        display: grid;
-        gap: 8px;
+      .unit-chip {
+        display: inline-flex;
+        min-height: 2.25rem;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0 1rem;
+        background: var(--surface-strong);
+        color: var(--ink-soft);
+        font-size: 0.82rem;
+        white-space: nowrap;
+      }
+
+      .content-grid {
         position: relative;
         z-index: 1;
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        gap: 0.75rem;
+        padding: 0 1.3rem 1.3rem;
       }
 
-      .ticker-row {
+      .summary-grid {
+        grid-column: 1 / span 4;
         display: grid;
-        grid-template-columns: 78px 1fr 62px;
-        gap: 12px;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.75rem;
+        min-width: 0;
+      }
+
+      .card,
+      .control-card,
+      .chart-card,
+      .results-panel,
+      .phone-preview {
+        min-width: 0;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.7);
+        box-shadow: var(--card-shadow);
+      }
+
+      .summary-card {
+        min-height: 7.2rem;
+        padding: 1rem;
+        display: grid;
+        align-content: space-between;
+        gap: 1rem;
+      }
+
+      .summary-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+      }
+
+      .summary-label {
+        color: var(--muted);
+        font-size: 0.78rem;
+      }
+
+      .summary-icon {
+        display: grid;
+        width: 1.7rem;
+        height: 1.7rem;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--accent);
+        color: #fff;
+        font-size: 0.72rem;
+        font-weight: 800;
+      }
+
+      .summary-value {
+        font-size: 1.6rem;
+        line-height: 1;
+        font-weight: 800;
+        font-variant-numeric: tabular-nums;
+        overflow-wrap: anywhere;
+      }
+
+      .summary-note {
+        color: var(--muted);
+        font-size: 0.72rem;
+      }
+
+      .chart-card {
+        grid-column: 5 / span 4;
+        min-height: 15.15rem;
+        padding: 1rem;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 0.75rem;
+      }
+
+      .card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.8rem;
+        min-width: 0;
+      }
+
+      .card-title {
+        margin: 0;
+        font-size: 0.94rem;
+        font-weight: 800;
+      }
+
+      .mini-chip {
+        display: inline-flex;
+        min-height: 1.65rem;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0 0.65rem;
+        background: var(--surface-strong);
+        color: var(--muted);
+        font-size: 0.72rem;
+        white-space: nowrap;
+      }
+
+      .allocation-visual {
+        display: grid;
+        gap: 0.62rem;
+        align-content: center;
+      }
+
+      .bar-row {
+        display: grid;
+        grid-template-columns: 4.6rem 1fr 3.2rem;
+        gap: 0.7rem;
         align-items: center;
         color: var(--muted);
-        font-size: 13px;
-        text-transform: uppercase;
+        font-size: 0.76rem;
       }
 
-      .bar {
-        height: 8px;
-        background:
-          linear-gradient(90deg, var(--green) var(--fill), transparent 0),
-          rgba(25, 33, 31, 0.1);
-        border: 1px solid rgba(25, 33, 31, 0.08);
+      .track {
+        height: 0.6rem;
+        overflow: hidden;
+        border-radius: 999px;
+        background: #e4e4df;
       }
 
-      .panel {
-        padding: 24px;
+      .fill {
+        display: block;
+        width: 0%;
+        height: 100%;
+        border-radius: inherit;
+        background: var(--accent);
+        transition: width 180ms ease;
+      }
+
+      .fill.actual {
+        background: var(--green);
+      }
+
+      .fill.cash {
+        background: var(--gold);
+      }
+
+      .chart-line {
+        width: 100%;
+        height: auto;
+        margin-top: 0.35rem;
+      }
+
+      .chart-line path {
+        fill: none;
+        stroke: var(--accent);
+        stroke-width: 2.4;
+        stroke-linecap: round;
+      }
+
+      .chart-line circle {
+        fill: var(--gold);
+        stroke: var(--surface-strong);
+        stroke-width: 2;
+      }
+
+      .budget-strip {
         display: grid;
-        gap: 18px;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.55rem;
       }
 
-      .section-title {
-        display: flex;
-        justify-content: space-between;
-        align-items: baseline;
-        gap: 16px;
-        border-bottom: 1px solid var(--line);
-        padding-bottom: 16px;
+      .budget-item {
+        border-top: 1px solid var(--line);
+        padding-top: 0.65rem;
       }
 
-      .section-title h2 {
-        margin: 0;
-        font-size: 24px;
-        line-height: 1.2;
-      }
-
-      .section-title span {
+      .budget-item span {
+        display: block;
         color: var(--muted);
-        font-size: 13px;
-        white-space: nowrap;
+        font-size: 0.72rem;
+      }
+
+      .budget-item strong {
+        display: block;
+        margin-top: 0.25rem;
+        font-size: 1rem;
+        font-variant-numeric: tabular-nums;
+        overflow-wrap: anywhere;
+      }
+
+      .control-card {
+        grid-column: 9 / span 4;
+        grid-row: span 2;
+        padding: 1rem;
+        display: grid;
+        gap: 0.9rem;
+        align-content: start;
       }
 
       .form {
         display: grid;
-        gap: 16px;
+        gap: 0.8rem;
+        min-width: 0;
       }
 
       .field {
         display: grid;
-        gap: 8px;
+        gap: 0.38rem;
       }
 
       .field label {
         display: flex;
+        align-items: center;
         justify-content: space-between;
-        gap: 12px;
+        gap: 0.75rem;
         color: var(--muted);
-        font-size: 14px;
+        font-size: 0.78rem;
       }
 
       .field input {
         width: 100%;
-        min-height: 54px;
+        min-height: 3.15rem;
         border: 1px solid var(--line-strong);
-        background: var(--field);
+        border-radius: var(--radius);
+        background: var(--surface-strong);
         color: var(--ink);
-        border-radius: 0;
-        padding: 0 16px;
-        font-size: 20px;
         outline: none;
+        padding: 0 0.95rem;
+        font-size: 1.08rem;
+        font-variant-numeric: tabular-nums;
         transition:
           border-color 160ms ease,
           box-shadow 160ms ease,
-          background-color 160ms ease;
+          transform 160ms ease;
       }
 
       .field input:focus {
-        border-color: var(--green);
-        background: var(--paper-strong);
-        box-shadow: 0 0 0 4px rgba(15, 122, 90, 0.12);
+        border-color: var(--accent);
+        box-shadow: 0 0 0 4px rgba(18, 18, 18, 0.08);
+        transform: translateY(-1px);
       }
 
       .presets {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
+        gap: 0.45rem;
       }
 
       .preset {
-        min-height: 42px;
+        min-height: 2.45rem;
         border: 1px solid var(--line-strong);
-        background: rgba(255, 250, 240, 0.68);
+        border-radius: var(--radius);
+        background: var(--surface-strong);
         color: var(--ink);
         cursor: pointer;
+        font-weight: 750;
         transition:
           transform 140ms ease,
           border-color 140ms ease,
@@ -273,302 +520,583 @@
 
       .preset:hover {
         transform: translateY(-1px);
-        border-color: var(--green);
+        border-color: var(--accent);
       }
 
       .preset.active {
-        background: var(--green);
-        border-color: var(--green);
-        color: var(--paper-strong);
-      }
-
-      .results {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-
-      .metric {
-        min-height: 92px;
-        border: 1px solid var(--line);
-        background: rgba(255, 250, 240, 0.62);
-        padding: 14px;
-        display: grid;
-        align-content: space-between;
-        gap: 10px;
-      }
-
-      .metric.primary {
-        grid-column: 1 / -1;
-        background: var(--ink);
-        color: var(--paper-strong);
-      }
-
-      .metric-label {
-        color: var(--muted);
-        font-size: 13px;
-      }
-
-      .metric.primary .metric-label {
-        color: rgba(255, 250, 240, 0.66);
-      }
-
-      .metric-value {
-        font-variant-numeric: tabular-nums;
-        font-size: 24px;
-        line-height: 1.05;
-        overflow-wrap: anywhere;
-      }
-
-      .metric.primary .metric-value {
-        font-size: clamp(40px, 9vw, 62px);
-        font-weight: 800;
+        border-color: var(--accent);
+        background: var(--accent);
+        color: #fff;
       }
 
       .hint {
-        min-height: 44px;
-        color: var(--muted);
-        font-size: 14px;
+        min-height: 2.9rem;
+        border-radius: var(--radius);
+        background: var(--surface-soft);
+        color: var(--ink-soft);
+        padding: 0.75rem 0.85rem;
+        font-size: 0.8rem;
         line-height: 1.55;
       }
 
       .hint.error {
+        background: rgba(188, 70, 59, 0.1);
         color: var(--red);
       }
 
       .hint.warn {
+        background: rgba(166, 107, 29, 0.12);
         color: var(--amber);
-      }
-
-      .actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        align-items: center;
-        justify-content: space-between;
-        border-top: 1px solid var(--line);
-        padding-top: 16px;
-      }
-
-      .ghost {
-        min-height: 40px;
-        border: 1px solid var(--line-strong);
-        background: transparent;
-        color: var(--ink);
-        padding: 0 14px;
-        cursor: pointer;
-      }
-
-      .ghost:hover {
-        border-color: var(--red);
-        color: var(--red);
       }
 
       .disclaimer {
         margin: 0;
         color: var(--muted);
-        font-size: 12px;
-        line-height: 1.6;
+        font-size: 0.72rem;
+        line-height: 1.55;
       }
 
-      @media (max-width: 900px) {
-        .page {
-          width: min(calc(100% - 24px), 720px);
-          padding: 18px 0;
+      .results-panel {
+        grid-column: 1 / span 8;
+        padding: 1rem;
+      }
+
+      .results-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .results {
+        display: grid;
+        grid-template-columns: 1.35fr repeat(4, 1fr);
+        gap: 0.55rem;
+      }
+
+      .metric {
+        min-height: 6.4rem;
+        display: grid;
+        align-content: space-between;
+        gap: 0.7rem;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface-strong);
+        padding: 0.85rem;
+      }
+
+      .metric.primary {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      .metric-label {
+        color: var(--muted);
+        font-size: 0.74rem;
+      }
+
+      .metric.primary .metric-label {
+        color: rgba(255, 255, 255, 0.66);
+      }
+
+      .metric-value {
+        font-size: 1.3rem;
+        line-height: 1.05;
+        font-weight: 780;
+        font-variant-numeric: tabular-nums;
+        overflow-wrap: anywhere;
+      }
+
+      .metric.primary .metric-value {
+        font-size: 2.35rem;
+        font-weight: 850;
+      }
+
+      .phone-preview {
+        grid-column: 9 / span 4;
+        min-height: 17.2rem;
+        padding: 0.75rem;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(244, 244, 241, 0.9)),
+          var(--surface-strong);
+      }
+
+      .phone-shell {
+        width: min(15.5rem, 100%);
+        min-height: 16rem;
+        margin: 0 auto;
+        border: 0.34rem solid #0b0b0b;
+        border-radius: 1.7rem;
+        background: #f8f8f6;
+        padding: 0.75rem;
+        box-shadow: 0 18px 36px rgba(0, 0, 0, 0.16);
+      }
+
+      .phone-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .phone-notch {
+        width: 4.4rem;
+        height: 1rem;
+        border-radius: 999px;
+        background: #0b0b0b;
+      }
+
+      .phone-dot {
+        width: 1.65rem;
+        height: 1.65rem;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
+      .phone-title {
+        margin: 0 0 0.75rem;
+        font-size: 0.82rem;
+        color: var(--muted);
+      }
+
+      .phone-main {
+        border-radius: var(--radius);
+        background: var(--accent);
+        color: #fff;
+        padding: 0.9rem;
+        margin-bottom: 0.55rem;
+      }
+
+      .phone-main span {
+        display: block;
+        color: rgba(255, 255, 255, 0.68);
+        font-size: 0.68rem;
+      }
+
+      .phone-main strong {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 1.85rem;
+        line-height: 1;
+      }
+
+      .phone-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        border-bottom: 1px solid var(--line);
+        padding: 0.6rem 0;
+        color: var(--muted);
+        font-size: 0.74rem;
+      }
+
+      .phone-row strong {
+        color: var(--ink);
+        font-size: 0.85rem;
+        font-variant-numeric: tabular-nums;
+      }
+
+      @media (max-width: 1020px) {
+        .workspace {
+          width: min(48rem, calc(100% - 1.5rem));
+          padding: 1.5rem 0;
         }
 
-        .shell {
+        .topbar,
+        .intro {
           grid-template-columns: 1fr;
         }
 
-        .masthead {
-          min-height: 360px;
-          padding: 26px;
+        .nav-pills {
+          justify-content: flex-start;
+          overflow-x: auto;
+          padding-bottom: 0.15rem;
         }
 
-        .subtitle {
-          font-size: 16px;
-        }
-      }
-
-      @media (max-width: 520px) {
-        .brandline,
-        .section-title,
-        .actions {
-          align-items: flex-start;
-          flex-direction: column;
+        .top-actions {
+          justify-content: flex-start;
         }
 
-        .panel {
-          padding: 18px;
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .summary-grid,
+        .chart-card,
+        .control-card,
+        .results-panel,
+        .phone-preview {
+          grid-column: auto;
+        }
+
+        .control-card {
+          order: 1;
+        }
+
+        .results-panel {
+          order: 2;
+        }
+
+        .summary-grid {
+          order: 3;
+        }
+
+        .chart-card {
+          order: 4;
+        }
+
+        .phone-preview {
+          order: 5;
         }
 
         .results {
-          grid-template-columns: 1fr;
-        }
-
-        .presets {
           grid-template-columns: repeat(2, 1fr);
         }
 
-        .ticker-row {
-          grid-template-columns: 58px 1fr;
+        .metric.primary {
+          grid-column: 1 / -1;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .workspace {
+          width: 100vw;
+          max-width: none;
+          padding: 0;
+        }
+
+        .dashboard {
+          border: 0;
+          border-radius: 0;
+        }
+
+        .dashboard::before {
+          display: none;
+        }
+
+        .topbar,
+        .intro,
+        .content-grid {
+          width: 100vw;
+          max-width: 100vw;
+          padding-left: 0.75rem;
+          padding-right: 0.75rem;
+        }
+
+        .topbar,
+        .intro {
+          min-width: 0;
+        }
+
+        .top-actions,
+        .card-header {
+          flex-wrap: wrap;
+        }
+
+        .content-grid > *,
+        .control-card,
+        .results-panel,
+        .summary-grid,
+        .chart-card {
+          width: 100%;
+          max-width: calc(100vw - 1.5rem);
+        }
+
+        .brand {
+          font-size: 0.92rem;
         }
 
         h1 {
-          font-size: clamp(40px, 13vw, 52px);
-          line-height: 1.02;
-        }
-
-        .subtitle {
-          font-size: 15px;
+          font-size: 1.48rem;
+          line-height: 1.18;
           word-break: break-all;
         }
 
-        .ticker-row span:last-child {
+        .intro-copy {
+          font-size: 0.82rem;
+          word-break: break-all;
+        }
+
+        .summary-grid,
+        .results,
+        .budget-strip,
+        .presets {
+          grid-template-columns: 1fr;
+        }
+
+        .summary-card,
+        .metric {
+          min-height: 5.8rem;
+        }
+
+        .bar-row {
+          grid-template-columns: 4.2rem 1fr 2.8rem;
+          gap: 0.45rem;
+        }
+
+        .phone-preview {
           display: none;
         }
       }
     </style>
   </head>
   <body>
-    <main class="page">
-      <div class="shell">
-        <section class="masthead" aria-labelledby="page-title">
-          <div class="brandline">
-            <div class="mark" aria-hidden="true">¥</div>
-            <div class="storage-note" id="storageNote">本地记住资产总值和仓位</div>
+    <main class="workspace">
+      <section class="dashboard" aria-labelledby="page-title">
+        <header class="topbar">
+          <div class="brand">
+            <span class="brand-mark" aria-hidden="true">S</span>
+            <span>STOCKCAL</span>
           </div>
 
-          <div class="hero">
-            <h1 id="page-title"><span>股票买入股数</span><span>计算器</span></h1>
-            <p class="subtitle">
+          <nav class="nav-pills" aria-label="计算器区域">
+            <span class="nav-pill active">Dashboard</span>
+            <span class="nav-pill">Position</span>
+            <span class="nav-pill">Presets</span>
+            <span class="nav-pill">Local Save</span>
+          </nav>
+
+          <div class="top-actions">
+            <span class="storage-note" id="storageNote">本地记住资产总值和仓位</span>
+            <button class="clear-button" id="clearSaved" type="button">清除记录</button>
+          </div>
+        </header>
+
+        <section class="intro">
+          <div>
+            <p class="eyebrow">Buy Position Calculator</p>
+            <h1 id="page-title"><span>下单前，先算清</span><span>可以买多少股。</span></h1>
+            <p class="intro-copy">
               输入资产、股价和仓位。<br />
-              快速得到可买股数、花费和现金。
+              实时得到股数、花费和现金。
             </p>
           </div>
-
-          <div class="ticker" aria-hidden="true">
-            <div class="ticker-row">
-              <span>Position</span>
-              <span class="bar" style="--fill: 30%"></span>
-              <span>30%</span>
-            </div>
-            <div class="ticker-row">
-              <span>Cash</span>
-              <span class="bar" style="--fill: 70%"></span>
-              <span>70%</span>
-            </div>
-            <div class="ticker-row">
-              <span>Unit</span>
-              <span class="bar" style="--fill: 100%"></span>
-              <span>1 股</span>
-            </div>
-          </div>
+          <span class="unit-chip">按 1 股向下取整</span>
         </section>
 
-        <section class="panel" aria-label="计算器">
-          <div class="section-title">
-            <h2>买入计算</h2>
-            <span>按 1 股向下取整</span>
-          </div>
+        <section class="content-grid" aria-label="股票买入计算器">
+          <section class="summary-grid" aria-label="关键输入概览">
+            <article class="card summary-card">
+              <div class="summary-top">
+                <span class="summary-label">资产总和</span>
+                <span class="summary-icon" aria-hidden="true">¥</span>
+              </div>
+              <div>
+                <div class="summary-value" id="assetPreview">¥0.00</div>
+                <div class="summary-note">自动保存到本地浏览器</div>
+              </div>
+            </article>
 
-          <form class="form" id="calculatorForm" novalidate>
-            <div class="field">
-              <label for="totalAssets">
-                <span>资产总和</span>
-                <span>人民币 / 元</span>
-              </label>
-              <input
-                id="totalAssets"
-                name="totalAssets"
-                inputmode="decimal"
-                type="number"
-                min="0"
-                step="0.01"
-                placeholder="例如 10000"
-                autocomplete="off"
-              />
-            </div>
+            <article class="card summary-card">
+              <div class="summary-top">
+                <span class="summary-label">目标仓位</span>
+                <span class="summary-icon" aria-hidden="true">%</span>
+              </div>
+              <div>
+                <div class="summary-value" id="targetPreview">30%</div>
+                <div class="summary-note">可用快捷按钮切换</div>
+              </div>
+            </article>
 
-            <div class="field">
-              <label for="stockPrice">
-                <span>当前股价</span>
-                <span>每股价格</span>
-              </label>
-              <input
-                id="stockPrice"
-                name="stockPrice"
-                inputmode="decimal"
-                type="number"
-                min="0"
-                step="0.01"
-                placeholder="例如 23.50"
-                autocomplete="off"
-              />
-            </div>
+            <article class="card summary-card">
+              <div class="summary-top">
+                <span class="summary-label">当前股价</span>
+                <span class="summary-icon" aria-hidden="true">P</span>
+              </div>
+              <div>
+                <div class="summary-value" id="pricePreview">¥0.00</div>
+                <div class="summary-note">每股价格</div>
+              </div>
+            </article>
 
-            <div class="field">
-              <label for="targetPercent">
-                <span>目标买入仓位</span>
-                <span>0 - 100%</span>
-              </label>
-              <input
-                id="targetPercent"
-                name="targetPercent"
-                inputmode="decimal"
-                type="number"
-                min="0"
-                max="100"
-                step="0.1"
-                placeholder="例如 30"
-                autocomplete="off"
-              />
+            <article class="card summary-card">
+              <div class="summary-top">
+                <span class="summary-label">买入单位</span>
+                <span class="summary-icon" aria-hidden="true">1</span>
+              </div>
+              <div>
+                <div class="summary-value">1 股</div>
+                <div class="summary-note">不按 100 股一手</div>
+              </div>
+            </article>
+          </section>
+
+          <section class="chart-card" aria-label="仓位统计">
+            <div class="card-header">
+              <h2 class="card-title">仓位统计</h2>
+              <span class="mini-chip">Realtime</span>
             </div>
 
-            <div class="presets" aria-label="仓位快捷选择">
-              <button class="preset" type="button" data-percent="5">5%</button>
-              <button class="preset" type="button" data-percent="10">10%</button>
-              <button class="preset" type="button" data-percent="20">20%</button>
-              <button class="preset" type="button" data-percent="30">30%</button>
-            </div>
-          </form>
+            <div class="allocation-visual">
+              <div class="bar-row">
+                <span>目标</span>
+                <span class="track"><span class="fill" id="targetBar"></span></span>
+                <strong id="targetBarValue">30%</strong>
+              </div>
+              <div class="bar-row">
+                <span>实际</span>
+                <span class="track"><span class="fill actual" id="actualBar"></span></span>
+                <strong id="actualBarValue">0%</strong>
+              </div>
+              <div class="bar-row">
+                <span>现金</span>
+                <span class="track"><span class="fill cash" id="cashBar"></span></span>
+                <strong id="cashBarValue">0%</strong>
+              </div>
 
-          <div class="results" aria-live="polite">
-            <div class="metric primary">
-              <div class="metric-label">可以买入</div>
-              <div class="metric-value" id="sharesResult">0 股</div>
+              <svg class="chart-line" viewBox="0 0 360 110" role="img" aria-label="仓位曲线示意图">
+                <path d="M8 82 C48 26, 82 28, 112 62 S176 84, 206 42 S276 20, 352 36" />
+                <circle cx="206" cy="42" r="5" />
+              </svg>
             </div>
-            <div class="metric">
-              <div class="metric-label">预计花费</div>
-              <div class="metric-value" id="costResult">¥0.00</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">剩余现金</div>
-              <div class="metric-value" id="cashResult">¥0.00</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">实际仓位</div>
-              <div class="metric-value" id="actualPercentResult">0.00%</div>
-            </div>
-            <div class="metric">
-              <div class="metric-label">目标预算未用</div>
-              <div class="metric-value" id="unusedResult">¥0.00</div>
-            </div>
-          </div>
 
-          <div class="hint" id="message">
-            输入资产总和、股价和目标仓位后，会自动计算买入股数。
-          </div>
+            <div class="budget-strip">
+              <div class="budget-item">
+                <span>目标预算</span>
+                <strong id="budgetPreview">¥0.00</strong>
+              </div>
+              <div class="budget-item">
+                <span>未使用预算</span>
+                <strong id="unusedPreview">¥0.00</strong>
+              </div>
+            </div>
+          </section>
 
-          <div class="actions">
-            <button class="ghost" id="clearSaved" type="button">清除记录</button>
+          <aside class="control-card" aria-label="输入区">
+            <div class="card-header">
+              <h2 class="card-title">买入设置</h2>
+              <span class="mini-chip">0 - 100%</span>
+            </div>
+
+            <form class="form" id="calculatorForm" novalidate>
+              <div class="field">
+                <label for="totalAssets">
+                  <span>资产总和</span>
+                  <span>人民币 / 元</span>
+                </label>
+                <input
+                  id="totalAssets"
+                  name="totalAssets"
+                  inputmode="decimal"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  placeholder="例如 10000"
+                  autocomplete="off"
+                />
+              </div>
+
+              <div class="field">
+                <label for="stockPrice">
+                  <span>当前股价</span>
+                  <span>每股价格</span>
+                </label>
+                <input
+                  id="stockPrice"
+                  name="stockPrice"
+                  inputmode="decimal"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  placeholder="例如 23.50"
+                  autocomplete="off"
+                />
+              </div>
+
+              <div class="field">
+                <label for="targetPercent">
+                  <span>目标买入仓位</span>
+                  <span>快捷仓位</span>
+                </label>
+                <input
+                  id="targetPercent"
+                  name="targetPercent"
+                  inputmode="decimal"
+                  type="number"
+                  min="0"
+                  max="100"
+                  step="0.1"
+                  placeholder="例如 30"
+                  autocomplete="off"
+                />
+              </div>
+
+              <div class="presets" aria-label="仓位快捷选择">
+                <button class="preset" type="button" data-percent="5">5%</button>
+                <button class="preset" type="button" data-percent="10">10%</button>
+                <button class="preset" type="button" data-percent="20">20%</button>
+                <button class="preset" type="button" data-percent="30">30%</button>
+              </div>
+            </form>
+
+            <div class="hint" id="message">
+              输入资产总和、股价和目标仓位后，会自动计算买入股数。
+            </div>
             <p class="disclaimer">
               仅作计算参考，不构成投资建议；未计入手续费、税费、滑点、融资融券或实时行情。
             </p>
-          </div>
+          </aside>
+
+          <section class="results-panel" aria-label="计算结果">
+            <div class="results-header">
+              <h2 class="card-title">买入结果</h2>
+              <span class="mini-chip">整数股数</span>
+            </div>
+
+            <div class="results" aria-live="polite">
+              <div class="metric primary">
+                <div class="metric-label">可以买入</div>
+                <div class="metric-value" id="sharesResult">0 股</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">预计花费</div>
+                <div class="metric-value" id="costResult">¥0.00</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">剩余现金</div>
+                <div class="metric-value" id="cashResult">¥0.00</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">实际仓位</div>
+                <div class="metric-value" id="actualPercentResult">0.00%</div>
+              </div>
+              <div class="metric">
+                <div class="metric-label">目标预算未用</div>
+                <div class="metric-value" id="unusedResult">¥0.00</div>
+              </div>
+            </div>
+          </section>
+
+          <aside class="phone-preview" aria-label="手机预览">
+            <div class="phone-shell">
+              <div class="phone-top">
+                <span class="phone-notch" aria-hidden="true"></span>
+                <span class="phone-dot" aria-hidden="true"></span>
+              </div>
+              <p class="phone-title">Mobile quick view</p>
+              <div class="phone-main">
+                <span>可以买入</span>
+                <strong id="phoneSharesResult">0 股</strong>
+              </div>
+              <div class="phone-row">
+                <span>预计花费</span>
+                <strong id="phoneCostResult">¥0.00</strong>
+              </div>
+              <div class="phone-row">
+                <span>剩余现金</span>
+                <strong id="phoneCashResult">¥0.00</strong>
+              </div>
+              <div class="phone-row">
+                <span>实际仓位</span>
+                <strong id="phonePercentResult">0.00%</strong>
+              </div>
+            </div>
+          </aside>
         </section>
-      </div>
+      </section>
     </main>
 
     <script>
@@ -591,6 +1119,21 @@
         message: document.querySelector("#message"),
         clearSaved: document.querySelector("#clearSaved"),
         storageNote: document.querySelector("#storageNote"),
+        assetPreview: document.querySelector("#assetPreview"),
+        targetPreview: document.querySelector("#targetPreview"),
+        pricePreview: document.querySelector("#pricePreview"),
+        budgetPreview: document.querySelector("#budgetPreview"),
+        unusedPreview: document.querySelector("#unusedPreview"),
+        targetBar: document.querySelector("#targetBar"),
+        actualBar: document.querySelector("#actualBar"),
+        cashBar: document.querySelector("#cashBar"),
+        targetBarValue: document.querySelector("#targetBarValue"),
+        actualBarValue: document.querySelector("#actualBarValue"),
+        cashBarValue: document.querySelector("#cashBarValue"),
+        phoneSharesResult: document.querySelector("#phoneSharesResult"),
+        phoneCostResult: document.querySelector("#phoneCostResult"),
+        phoneCashResult: document.querySelector("#phoneCashResult"),
+        phonePercentResult: document.querySelector("#phonePercentResult"),
       };
 
       const moneyFormatter = new Intl.NumberFormat("zh-CN", {
@@ -647,15 +1190,68 @@
         });
       }
 
-      function resetResults() {
+      function setText(element, value) {
+        if (element) {
+          element.textContent = value;
+        }
+      }
+
+      function setBar(element, value) {
+        if (element) {
+          element.style.width = `${Math.min(100, Math.max(0, value))}%`;
+        }
+      }
+
+      function updateDashboard({
+        totalAssets = NaN,
+        stockPrice = NaN,
+        targetPercent = NaN,
+        targetBudget = 0,
+        estimatedCost = 0,
+        remainingCash = 0,
+        actualPercent = 0,
+        unusedBudget = 0,
+        shares = 0,
+      } = {}) {
+        const safeTarget = Number.isFinite(targetPercent) ? targetPercent : 0;
+        const safeActual = Number.isFinite(actualPercent) ? actualPercent : 0;
+        const cashPercent = Number.isFinite(totalAssets) && totalAssets > 0 ? (remainingCash / totalAssets) * 100 : 0;
+        const formattedShares = `${numberFormatter.format(shares)} 股`;
+        const formattedCost = moneyFormatter.format(estimatedCost);
+        const formattedCash = moneyFormatter.format(remainingCash);
+        const formattedActual = `${safeActual.toFixed(2)}%`;
+
+        setText(elements.assetPreview, Number.isFinite(totalAssets) ? moneyFormatter.format(totalAssets) : "¥0.00");
+        setText(elements.pricePreview, Number.isFinite(stockPrice) ? moneyFormatter.format(stockPrice) : "¥0.00");
+        setText(elements.targetPreview, `${safeTarget}%`);
+        setText(elements.budgetPreview, moneyFormatter.format(targetBudget));
+        setText(elements.unusedPreview, moneyFormatter.format(unusedBudget));
+        setText(elements.targetBarValue, `${safeTarget}%`);
+        setText(elements.actualBarValue, `${Math.round(safeActual)}%`);
+        setText(elements.cashBarValue, `${Math.round(cashPercent)}%`);
+        setText(elements.phoneSharesResult, formattedShares);
+        setText(elements.phoneCostResult, formattedCost);
+        setText(elements.phoneCashResult, formattedCash);
+        setText(elements.phonePercentResult, formattedActual);
+
+        setBar(elements.targetBar, safeTarget);
+        setBar(elements.actualBar, safeActual);
+        setBar(elements.cashBar, cashPercent);
+      }
+
+      function resetResults(targetPercent = 0) {
         elements.sharesResult.textContent = "0 股";
         elements.costResult.textContent = moneyFormatter.format(0);
         elements.cashResult.textContent = moneyFormatter.format(0);
         elements.actualPercentResult.textContent = "0.00%";
         elements.unusedResult.textContent = moneyFormatter.format(0);
+        updateDashboard({ targetPercent });
       }
 
       function calculate({ persist = true } = {}) {
+        const hasAssets = elements.totalAssets.value.trim() !== "";
+        const hasPrice = elements.stockPrice.value.trim() !== "";
+        const hasPercent = elements.targetPercent.value.trim() !== "";
         const totalAssets = parseNumber(elements.totalAssets.value);
         const stockPrice = parseNumber(elements.stockPrice.value);
         const rawPercent = parseNumber(elements.targetPercent.value);
@@ -671,26 +1267,32 @@
           elements.storageNote.textContent = "已保存本地记录";
         }
 
-        if (!Number.isFinite(totalAssets) && !Number.isFinite(stockPrice) && !Number.isFinite(targetPercent)) {
-          resetResults();
-          setMessage("输入资产总和、股价和目标仓位后，会自动计算买入股数。");
+        updateDashboard({
+          totalAssets,
+          stockPrice,
+          targetPercent: Number.isFinite(targetPercent) ? targetPercent : 0,
+        });
+
+        if (!hasAssets && !hasPrice) {
+          resetResults(Number.isFinite(targetPercent) ? targetPercent : 0);
+          setMessage("输入资产总和与当前股价后，结果会即时更新。");
           return;
         }
 
         if (!Number.isFinite(totalAssets) || totalAssets <= 0) {
-          resetResults();
+          resetResults(Number.isFinite(targetPercent) ? targetPercent : 0);
           setMessage("资产总和必须大于 0。", "error");
           return;
         }
 
         if (!Number.isFinite(stockPrice) || stockPrice <= 0) {
-          resetResults();
+          resetResults(Number.isFinite(targetPercent) ? targetPercent : 0);
           setMessage("当前股价必须大于 0。", "error");
           return;
         }
 
-        if (!Number.isFinite(targetPercent)) {
-          resetResults();
+        if (!hasPercent || !Number.isFinite(targetPercent)) {
+          resetResults(0);
           setMessage("请输入目标买入仓位百分比。", "error");
           return;
         }
@@ -707,6 +1309,18 @@
         elements.cashResult.textContent = moneyFormatter.format(remainingCash);
         elements.actualPercentResult.textContent = `${actualPercent.toFixed(2)}%`;
         elements.unusedResult.textContent = moneyFormatter.format(unusedBudget);
+
+        updateDashboard({
+          totalAssets,
+          stockPrice,
+          targetPercent,
+          targetBudget,
+          estimatedCost,
+          remainingCash,
+          actualPercent,
+          unusedBudget,
+          shares,
+        });
 
         if (targetPercent === 0) {
           setMessage("目标仓位为 0%，本次不建议买入。");
@@ -741,7 +1355,7 @@
         elements.storageNote.textContent = hasSaved ? "已恢复本地记录" : "本地记住资产总值和仓位";
       }
 
-      elements.form.addEventListener("input", calculate);
+      elements.form.addEventListener("input", () => calculate());
 
       elements.presets.forEach((button) => {
         button.addEventListener("click", () => {
